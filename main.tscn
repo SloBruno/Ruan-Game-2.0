@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dalypydck52sm"]
+
+[ext_resource type="PackedScene" uid="uid://ppo3em2ton5l" path="res://player.tscn" id="1_s20qb"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_bycyq"]
+size = Vector2(720, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cb2y5"]
+size = Vector2(720, 32)
+
+[node name="Main" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(359, 223)
+metadata/_edit_group_ = true
+
+[node name="Mesh" type="MeshInstance2D" parent="Ground"]
+mesh = SubResource("QuadMesh_bycyq")
+
+[node name="Collision" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_cb2y5")
+
+[node name="Player" parent="." instance=ExtResource("1_s20qb")]
+position = Vector2(94, 190)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
