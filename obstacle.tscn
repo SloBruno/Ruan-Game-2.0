@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1t24wo2antx8"]
+
+[ext_resource type="Texture2D" uid="uid://cw2fabf7204c8" path="res://assets/juice_idle.png" id="1_81kml"]
+[ext_resource type="Script" path="res://obstacle.gd" id="1_yqxrm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cehkx"]
+size = Vector2(6, 29)
+
+[node name="Obstacle" type="Area2D"]
+scale = Vector2(1.4, 1.4)
+script = ExtResource("1_yqxrm")
+metadata/_edit_group_ = true
+
+[node name="Seringa" type="Area2D" parent="."]
+rotation = 3.14159
+
+[node name="Sprite2D" type="Sprite2D" parent="Seringa"]
+texture = ExtResource("1_81kml")
+region_enabled = true
+region_rect = Rect2(12.9181, 0.161406, 7.02679, 29.999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cehkx")

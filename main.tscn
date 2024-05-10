@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dalypydck52sm"]
+[gd_scene load_steps=5 format=3 uid="uid://dalypydck52sm"]
 
 [ext_resource type="PackedScene" uid="uid://ppo3em2ton5l" path="res://player.tscn" id="1_s20qb"]
+[ext_resource type="PackedScene" uid="uid://d1t24wo2antx8" path="res://obstacle.tscn" id="2_wa4iq"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_bycyq"]
 size = Vector2(720, 32)
@@ -25,3 +26,6 @@ position = Vector2(94, 190)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="Obstacle" parent="." instance=ExtResource("2_wa4iq")]
+position = Vector2(125, 188)
