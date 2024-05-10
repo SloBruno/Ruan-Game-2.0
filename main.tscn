@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dalypydck52sm"]
+[gd_scene load_steps=6 format=3 uid="uid://dalypydck52sm"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_7rb80"]
 [ext_resource type="PackedScene" uid="uid://ppo3em2ton5l" path="res://player.tscn" id="1_s20qb"]
-[ext_resource type="PackedScene" uid="uid://d1t24wo2antx8" path="res://obstacle.tscn" id="2_wa4iq"]
+[ext_resource type="FontFile" uid="uid://be8oi0enn3fg" path="res://assets/Xolonium-Regular.ttf" id="3_500ec"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_bycyq"]
 size = Vector2(720, 32)
@@ -10,9 +11,11 @@ size = Vector2(720, 32)
 size = Vector2(720, 32)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_7rb80")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(359, 223)
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="Mesh" type="MeshInstance2D" parent="Ground"]
@@ -22,10 +25,82 @@ mesh = SubResource("QuadMesh_bycyq")
 shape = SubResource("RectangleShape2D_cb2y5")
 
 [node name="Player" parent="." instance=ExtResource("1_s20qb")]
-position = Vector2(94, 190)
+position = Vector2(116, 176)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="Obstacle" parent="." instance=ExtResource("2_wa4iq")]
-position = Vector2(125, 188)
+[node name="ObstacleContainer" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 2
+offset_left = 38.0
+offset_top = 13.0
+offset_right = 55.0
+offset_bottom = 43.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_500ec")
+theme_override_font_sizes/font_size = 24
+text = "0
+"
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Message" type="Label" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = 20.0
+offset_right = 129.0
+offset_bottom = 59.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_500ec")
+theme_override_font_sizes/font_size = 32
+text = "Ruan Game 2.0
+"
+
+[node name="Start" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -23.5
+offset_right = 45.5
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_500ec")
+theme_override_font_sizes/font_size = 32
+text = "Start
+"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Menu/Start" to="." method="_on_start_pressed"]

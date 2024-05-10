@@ -1,13 +1,17 @@
 extends Area2D
 
-var speed := 100
+var speed := 400
 
-func _ready():
-	position.x = 720
+func _physics_process(delta):
+	if !Globals.end:
+		global_position.x = move_toward(global_position.x, -1000, speed * delta)
+		
+func _on_body_entered(body):
+	Globals.end = true
+	body.anime.play("dying")
+	speed = 0
+	get_tree().current_scene.timer.stop()
+	Globals.end_game.emit()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	position.x = move_toward(position.x, -1000, speed * delta)
-	if position.x < -100:
-		position.x = 720
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()
